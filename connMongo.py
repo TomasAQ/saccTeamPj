@@ -1,12 +1,14 @@
 import pymongo
 from pymongo import MongoClient
 import pandas as pd
+import data.connInfo as dbinfo
+
 
 # mongodb 접속
 def mongoConn() :
     global collect;
-    host = "localhost"
-    port = 27017
+    host , port  = dbinfo.mongoInfo()
+
     conn =MongoClient(host, port)
     #weater 라는 이름의 데이터베이스가 만들어짐
     db=conn.weather
@@ -42,6 +44,8 @@ def showData() :
     rows = collect.find()
     for row in rows :
         print(row)
+
+    #print(collect.count())
 
 if __name__ == '__main__':
     mongoConn()
