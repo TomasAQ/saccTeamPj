@@ -4,10 +4,10 @@ import pandas as pd
 def read_csv_df() :
     # 1.1. 전역으로 데이터를 어디서나 접근하기 위해서 전역으로 선언
     global dfPreF , dfHum, dfPre, dfTem , dfRes
-    dfPreF = pd.read_csv("data/cheon_yeondong_precipitation_form_202001_202012.csv")
-    dfHum = pd.read_csv("data/cheon_yeondong_humidity_202001_202012.csv")
-    dfPre = pd.read_csv("data/cheon_yeondong_precipitation_202001_202012.csv")
-    dfTem = pd.read_csv("data/cheon_yeondong_temperature_202001_202012.csv")
+    dfPreF = pd.read_csv("data/li_cheon_yeondong_precipitation_form_202001_202012.csv")
+    dfHum = pd.read_csv("data/li_cheon_yeondong_humidity_202001_202012.csv")
+    dfPre = pd.read_csv("data/li_cheon_yeondong_precipitation_202001_202012.csv")
+    dfTem = pd.read_csv("data/li_cheon_yeondong_temperature_202001_202012.csv")
 
 
 #2. 필요한 데이터만 가져오기
