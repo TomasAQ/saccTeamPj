@@ -87,6 +87,24 @@ def precipitationlist(mon,day):
 
     return preclist
 
+def hltemp() :
+    mongoConn()
+    htemp = collect.find({}).limit(1).sort("temperature", pymongo.DESCENDING)
+    ltemp = collect.find({"temperature":{"$gt":-50}}).limit(1).sort("temperature", pymongo.ASCENDING)
+    #ltemp = collect.find({}).limit(10).sort("temperature", pymongo.ASCENDING)
+
+
+    for row in htemp :
+        #print(row)
+        hitempval = row['temperature']
+        hitempdayval = row['date']
+
+    for row in ltemp:
+        #print(row)
+        lotempval = row['temperature']
+        lotempdayval = row['date']
+
+    return hitempval,hitempdayval.replace(" ",""),lotempval,lotempdayval.replace(" ","")
 
 # 접속 종료
 #def dbOut() :
@@ -98,7 +116,12 @@ def precipitationlist(mon,day):
 if __name__ == '__main__':
      # mongoConn()
      # showData()
-     precipitationlist(1, 1)
+     #precipitationlist(1, 1)
+     a,b,c,d = hltemp()
+     print(a)
+     print(b)
+     print(c)
+     print(d)
 
 
 
