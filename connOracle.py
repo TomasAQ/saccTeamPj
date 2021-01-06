@@ -1,6 +1,8 @@
 import cx_Oracle
 import datetime
 import data.connInfo as dbInfo
+import pandas as pd
+import connMongo as mongoData
 
 
 def oraConn() :
@@ -29,15 +31,44 @@ def oraSelect() :
 
 
 def insertOrData() :
-
     items = [
         ('106' ,'천연동', 30, datetime.date(2020,12, 1 ), -10, datetime.date(2020,1, 1 )),
         ('107' ,'xx동', 31, datetime.date(2020,1, 1 ), -10, datetime.date(2020,12, 1 ))
     ]
     for row in items:
         sql = "INSERT INTO TLIsedaemun  VALUES(Slisedidx.nextval , :1,:2,:3,:4,:5,:6 )"
-        cur.execute(sql,row)
+        con.cursor().execute(sql,row)
     con.commit()
+
+
+
+
+def insertTLIsedaemunday() :
+    #1. csv 파일에서 일별 최고기온,최저기온,평균기온,총강수량
+    #온도 , 강수량
+    # temlist = mongoData.tempmonlist(1, 1)
+    # preclist = mongoData.precipitationlist(1,1)
+
+    items = []
+    for mon in range(1,13) :
+        for day in range(1,32) :
+            temlist = mongoData.tempmonlist(mon, day)
+            preclist = mongoData.precipitationlist(mon, day)
+            if temlist :
+                items.append(('106', '2020'+str(mon).zfill(2)+str(day).zfill(2), max(temlist) , min(temlist) ,  sum(temlist) / len(temlist) , sum(preclist)))
+
+    # items = [
+    #     ( '106', '202001', max(temlist) , min(temlist) ,  sum(temlist) / len(temlist) , sum(preclist) )
+    # ]
+
+
+    # 데이터 insert query
+    for row in items:
+        sql = "INSERT INTO TLIsedaemunday  VALUES(Sliseddayidx.nextval , :1,:2,:3,:4,:5,:6)"
+        cur.execute(sql, row)
+    con.commit()
+
+    print('inert data : '+str(len(items)));
 
 
 # 접속 종료
@@ -45,12 +76,27 @@ def dbOut() :
     cur.close()
     con.close()
 
-if __name__ == '__main__':
-    oraConn()
-    # insertOrData()
-    # test()
-    oraSelect()
-    dbOut()
+def testmongodata() :
+    for day in range(1,32) :
+        list = mongoData.tempmonlist(1,day)
 
+    print(list)
+
+    print(max(list))
+    print(min(list))
+    print(sum(list)/len(list))
+
+
+if __name__ == '__main__':
+    #testmongodata()
+    oraConn()
+    insertTLIsedaemunday()
+    #oraConn()
+    # insertOrData()
+    #test()
+    #dbOut()
+    
+    #csv 파일처리
+    #readCSVCY()
 
 

@@ -3,19 +3,22 @@ from pymongo import MongoClient
 import pandas as pd
 import data.connInfo as dbinfo
 
-
-# mongodb 접속
 def mongoConn() :
-    global collect;
-    host , port  = dbinfo.mongoInfo()
+    global collect , conn;
+    host, port = dbinfo.mongoInfo()
 
-    conn =MongoClient(host, port)
-    #weater 라는 이름의 데이터베이스가 만들어짐
-    db=conn.weather
-    #weater에 cheonYeondong 컬렉션 생성
+    conn = MongoClient(host, port)
+    # weater 라는 이름의 데이터베이스가 만들어짐
+    db = conn.weather
+    # weater에 cheonYeondong 컬렉션 생성
     collect = db.cheonYeondong
 
+# mongodb 접속
+#def mongoConn() :
+
+
 # csv 파일 읽고 안에 있는 데이터 넣기
+# 초기에 한번만 실행
 def mongoInsertData() :
     dfChen_Y = pd.read_csv("cheon_yeondong.csv")
 
@@ -47,9 +50,58 @@ def showData() :
 
     #print(collect.count())
 
-if __name__ == '__main__':
+# 일별 기온을 list로 리턴
+def tempmonlist(mon,day):
     mongoConn()
-    # 초기에 한번만 실행
-    #mongoInsertData()
-    showData()
+    tempday = '2020'+str(mon).zfill(2)+' '+str(day)
+
+    #rows = collect.find({'date': '202001 1'}).sort("temperature", pymongo.ASCENDING)
+    rows = collect.find({'date': tempday}).sort("temperature", pymongo.DESCENDING)
+
+    #rows = collect.find({'date': '202001 1'})
+    #rows = collect.find({'temperature':0.3})
+
+    #rows = collect.find({'date': '202001 1'}).sort({'temperature':-1})
+    #rows = collect.find({'date': '202001 1'})
+
+    templist = []
+    for row in rows:
+        temp = row['temperature']
+        templist.append(temp)
+
+    return  templist
+
+
+# 일별 강수량 데이터를 list에 담아서 리턴
+def precipitationlist(mon,day):
+    mongoConn()
+    precday = '2020' + str(mon).zfill(2) + ' ' + str(day)
+
+    # rows = collect.find({'date': '202001 1'}).sort("temperature", pymongo.ASCENDING)
+    rows = collect.find({'date': precday}).sort("precipitation", pymongo.DESCENDING)
+
+    preclist = []
+    for row in rows :
+        prec = row['precipitation']
+        preclist.append(prec)
+
+    return preclist
+
+
+# 접속 종료
+#def dbOut() :
+#    collect.close()
+#    conn.close()
+
+
+
+if __name__ == '__main__':
+     # mongoConn()
+     # showData()
+     precipitationlist(1, 1)
+
+
+
+
+
 
