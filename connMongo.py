@@ -4,7 +4,7 @@ import pandas as pd
 import data.connInfo as dbinfo
 
 def mongoConn() :
-    global collect , conn;
+    global conn , collect , foCYeondong;
     host, port = dbinfo.mongoInfo()
 
     conn = MongoClient(host, port)
@@ -12,6 +12,7 @@ def mongoConn() :
     db = conn.weather
     # weater에 cheonYeondong 컬렉션 생성
     collect = db.cheonYeondong
+    foCYeondong = db.focheonYeondong
 
 # mongodb 접속
 #def mongoConn() :
@@ -19,7 +20,8 @@ def mongoConn() :
 
 # csv 파일 읽고 안에 있는 데이터 넣기
 # 초기에 한번만 실행
-def mongoInsertData() :
+# 천연동 실황 데이터
+def insertlicheonyeondongData() :
     dfChen_Y = pd.read_csv("cheon_yeondong.csv")
 
     for i in  range(len(dfChen_Y)):
@@ -29,6 +31,18 @@ def mongoInsertData() :
         a, dayVal, hourVal, precipitation_formVal, humidityVal, precipitationVal, temperatureVal, dateVal = dfChen_Y.loc[i]
 
         collect.insert_one({'date': str(dateVal) , 'day' : str(dayVal) , 'hour' : str(hourVal) , 'precipitationForm' : float(precipitation_formVal) , 'humidity' : float(humidityVal) , 'precipitation' : float(precipitationVal) , 'temperature' : float(temperatureVal) })
+# 천연동 관측 데이터
+def insertfocheonyeondongData() :
+    dffoCh = pd.read_csv("fo_cheon_yeondong.csv")
+    for i in range(len(dffoCh)) :
+        # 컬럼명
+        # a, format: day,hour,forecast,precipitation_form,humidity,precipitation,temperature,date
+        a, dayVal, hourVal, forecastVal ,precipitation_formVal, humidityVal, precipitationVal, temperatureVal, dateVal =dffoCh.loc[i]
+        foCYeondong.insert_one({'date': str(dateVal), 'day': str(dayVal), 'hour': str(hourVal),'forecast':str(forecastVal),'precipitationForm': float(precipitation_formVal), 'humidity': float(humidityVal),'precipitation': float(precipitationVal), 'temperature': float(temperatureVal)})
+
+    print('complet add data')
+
+
 # collection 전체 제거
 def delectAllCollect() :
     # 전체 문서 삭제
@@ -42,11 +56,23 @@ def updateEx() :
     #collect.update_one({'no': 1}, {'$set': {'kor': 100, 'eng': 100}})
     pass
 
-# 모든 데이터 출려
-def showData() :
+# 천연동 실황데이터
+def showlicheonyeondong() :
     rows = collect.find()
     for row in rows :
         print(row)
+
+    #print(rows.count())
+    # 8784
+
+def showfocheonyeondong():
+    rows = foCYeondong.find()
+    for row in rows:
+        print(row)
+
+    #print(rows.count())
+    # 43082
+
 
     #print(collect.count())
 
@@ -114,14 +140,11 @@ def hltemp() :
 
 
 if __name__ == '__main__':
-     # mongoConn()
-     # showData()
+     mongoConn()
+     #showfocheonyeondong()
+     showlicheonyeondong()
      #precipitationlist(1, 1)
-     a,b,c,d = hltemp()
-     print(a)
-     print(b)
-     print(c)
-     print(d)
+     #insertfocheonyeondongData()
 
 
 
