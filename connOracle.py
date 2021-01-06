@@ -11,15 +11,16 @@ def oraConn() :
     cur = con.cursor()
 
 def test() :
-    cur.execute("select * from pyoraTest ")
+    cur.execute("select * from TLIsedaemun ")
     res = cur.fetchall()
     for row in res:
         print(row)
 
 def oraSelect() :
-    #sql = "SELECT EMPNO , ENAME FROM EMP WHERE ENAME=:ENAME AND ENPNO:=enpno"
-    sql = "SELECT EMPNO , ENAME FROM EMP WHERE ENAME=:ENAME AND EMPNO=:EMPNO"
-    cur.execute(sql , ENAME='BLAKE' , EMPNO=7698)
+    # sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode  AND idx=:idx"
+    # cur.execute(sql , dcode='106' , idx=1)
+    sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode"
+    cur.execute(sql, dcode='106')
 
     res = cur.fetchall()
     for row in res :
@@ -28,28 +29,16 @@ def oraSelect() :
 
 
 def insertOrData() :
+
     items = [
-        (8888, 'pythonin', 'CLERK', 7902, datetime.datetime(1980, 12, 17, 0, 0), 1300.0, None, 20),
-        (8899, 'pythonin', 'CLERK', 7902, datetime.datetime(1980, 12, 17, 0, 0), 1300.0, None, 20)
+        ('106' ,'천연동', 30, datetime.date(2020,12, 1 ), -10, datetime.date(2020,1, 1 )),
+        ('107' ,'xx동', 31, datetime.date(2020,1, 1 ), -10, datetime.date(2020,12, 1 ))
     ]
     for row in items:
-        sql = "insert into emp values(:1,:2,:3,:4,:5,:6,:7,:8)"
+        sql = "INSERT INTO TLIsedaemun  VALUES(Slisedidx.nextval , :1,:2,:3,:4,:5,:6 )"
         cur.execute(sql,row)
-
     con.commit()
 
-
-def insertOrData2() :
-    items = [
-        (8888, 'pythonin', 'CLERK', 7902, datetime.datetime(1980, 12, 17, 0, 0), 1300.0, None, 20),
-        (8899, 'pythonin', 'CLERK', 7902, datetime.datetime(1980, 12, 17, 0, 0), 1300.0, None, 20)
-    ]
-
-    sql = "insert into emp values(:1,:2,:3,:4,:5,:6,:7,:8)"
-    cur.bindarraysize = len(items)
-    cur.execute(sql,items)
-
-    con.commit()
 
 # 접속 종료
 def dbOut() :
@@ -58,10 +47,9 @@ def dbOut() :
 
 if __name__ == '__main__':
     oraConn()
-    #oraSelect()
-    test()
-    #insertOrData()
-
+    # insertOrData()
+    # test()
+    oraSelect()
     dbOut()
 
 
