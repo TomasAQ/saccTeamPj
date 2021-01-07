@@ -141,8 +141,7 @@ def hltemp() :
 
 if __name__ == '__main__':
      mongoConn()
-     #showfocheonyeondong()
-     showlicheonyeondong()
+     a,b,c,d = hltemp()
      #precipitationlist(1, 1)
      #insertfocheonyeondongData()
 

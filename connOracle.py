@@ -18,16 +18,7 @@ def test() :
     for row in res:
         print(row)
 
-def oraSelect() :
-    # sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode  AND idx=:idx"
-    # cur.execute(sql , dcode='106' , idx=1)
-    sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode"
-    cur.execute(sql, dcode='106')
 
-    res = cur.fetchall()
-    for row in res :
-        #print(str(row[0])+"/////"+row[1])
-        print(row)
 
 # 서대문구 실황 테이블
 def insertTLIsedaemun() :
@@ -59,22 +50,34 @@ def insertTLIsedaemunday() :
     print('inert data : '+str(len(items)));
 
 
+def selectTLI(dcode) :
+    oraConn()
+    dcode = dcode
+    # sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode  AND idx=:idx"
+    # cur.execute(sql , dcode='106' , idx=1)
+    sql = "SELECT * FROM TLIsedaemun WHERE dcode=:dcode"
+    cur.execute(sql, dcode=str(dcode))
+    res = cur.fetchall()
+
+    for row in res :
+        #print(str(row[0])+"/////"+row[1])
+        result = row
+    dbOut()
+    return result
+
+def selectTLIday():
+    oraConn()
+    sql = "SELECT * FROM TLIsedaemunday ORDER BY lidate "
+    cur.execute(sql)
+    res = cur.fetchall()
+    result = []
+    for row in res :
+        result.append(row)
+
+    dbOut()
+    return result
+
 # 접속 종료
 def dbOut() :
     cur.close()
     con.close()
-    
-
-
-if __name__ == '__main__':
-    #testmongodata()
-    # 한번만 실행
-    oraConn()
-    # 서대문구 일별 실황 테이블 db 저장로직
-    #insertTLIsedaemunday()
-    # 서대문구 실황 테이블 db저장로직
-    insertTLIsedaemun()
-
-
-
-
