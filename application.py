@@ -1,5 +1,9 @@
 from flask import Flask , render_template , request ,redirect , url_for
 import connOracle
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -31,7 +35,17 @@ def daylist():
     list = connOracle.selectTLIday()
     return render_template("daylist.html" , result_list = list)
 
+@app.route('/grap')
+def grap():
+    list = connOracle.selectTLIday()
+    #return render_template("grap.html" , result_list = list)
 
+    df = pd.read_csv("cheon_yeondong.csv")
+    sns.barplot(data=df, x="date", y="temperature")
+    plt.savefig('./static/image/grap.jpg')
+
+    #return render_template("grap.html" , photo =f"/static/image/grap.jpg")
+    return render_template("grap.html" , image_file="image/grap.jpg")
 
 if __name__ == '__main__':
     app.run()
