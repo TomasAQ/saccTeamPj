@@ -2,16 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SSAC Project_1st Team 5</title>
+    <!--    bootstrap-->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/starter-template.css" rel="stylesheet">
 </head>
 <body>
 
 
 <br>
+
 <h2> 동이름 : {{result_list[2]}}</h2>
-최고기온 : {{result_list[3]}} &nbsp;&nbsp;&nbsp;&nbsp; 관측일 : {{result_list[4]}} <br>
-최저기온 : {{result_list[5]}} &nbsp;&nbsp;&nbsp;&nbsp; 관측일 : {{result_list[6]}} <br>
+<table class="table">
+    <tr>
+        <td class="danger">최고기온 : {{result_list[3]}} &nbsp;&nbsp;&nbsp;&nbsp; 관측일 : {{result_list[4]}} </td>
+    </tr>
+    <tr>
+        <td class="info">최저기온 : {{result_list[5]}} &nbsp;&nbsp;&nbsp;&nbsp; 관측일 : {{result_list[6]}}</td>
+    </tr>
+</table>
 
 
+
+
+<!--    bootstrap-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </body>
 </html>

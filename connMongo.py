@@ -137,16 +137,59 @@ def hltemp() :
 #    collect.close()
 #    conn.close()
 
+# 실황데이터 와 관측데이터에 최고 기온 비교
+def comcheonhilotemp():
+    mongoConn()
+    li = collect.find({}).limit(3).sort("temperature", pymongo.DESCENDING)
+    fo = foCYeondong.find({}).limit(3).sort("temperature",pymongo.DESCENDING)
+    licheon = []
+    focheon = []
+    for row in li:
+        #licheon.append(row['temperature'])
+        licheon.append(row)
 
+    for row in fo:
+        focheon.append(row)
 
-if __name__ == '__main__':
-     mongoConn()
-     a,b,c,d = hltemp()
-     #precipitationlist(1, 1)
-     #insertfocheonyeondongData()
+    print(licheon)
+    print(focheon)
+    
+# 일별 예보데이터를 가져온다.
+def comcheonday(mon, day,focast):
+    tempday = '2020'+str(mon).zfill(2)+' '+str(day)
+    focast = focast
+    mongoConn()
+    fo = foCYeondong.find({'date': tempday,'forecast':focast})
+    list = []
+    for row in fo :
+       list.append(row)
+    return list
 
+# 일별 예보데이터 중 원하는 데이터를 갸져온다.
+def fotempmonlist(mon,day,focast,col):
+    tempday = '2020' + str(mon).zfill(2) + ' ' + str(day)
+    focast = focast
+    mongoConn()
+    fo = foCYeondong.find({'date': tempday, 'forecast': focast})
 
+    templist = []
+    for row in fo:
+        temp = row[col]
+        templist.append(temp)
 
+    return  templist
 
+# # 일별 최고,최저 기온,평균기온 , 총강수량 가져오기
+def fodaydata(focast) :
+    items = []
+    focast = focast
+    for mon in range(1, 13):
+        for day in range(1, 32):
+             temlist = fotempmonlist(mon,day,focast,'temperature')
+             preclist = fotempmonlist(mon, day, focast, 'precipitation')
+             if temlist:
+                 items.append( ('106', '2020' + str(mon).zfill(2) + str(day).zfill(2), str(focast) ,max(temlist), min(temlist) , round(sum(temlist) / len(temlist),2) , round(sum(preclist),2) ) )
+
+    return items
 
 

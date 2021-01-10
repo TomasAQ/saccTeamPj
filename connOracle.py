@@ -64,7 +64,7 @@ def selectTLI(dcode) :
         result = row
     dbOut()
     return result
-
+# 일별로 저장된 실황 데이터 가져오기
 def selectTLIday():
     oraConn()
     sql = "SELECT * FROM TLIsedaemunday ORDER BY lidate "
@@ -77,7 +77,27 @@ def selectTLIday():
     dbOut()
     return result
 
+def selectTLIdayData(date , col):
+    oraConn()
+    date =date
+    col = col
+    if col == "hitemp" :
+        sql = "select lidate , hitemp from TLIsedaemunday where lidate=:lidate ORDER BY lidate "
+    elif col == "lotemp" :
+        sql = "select lidate , lotemp from TLIsedaemunday where lidate=:lidate ORDER BY lidate "
+    elif col == "avgtemp" :
+        sql = "select lidate , avgtemp from TLIsedaemunday where lidate=:lidate ORDER BY lidate "
+    elif col == "totpcp" :
+        sql = "select lidate , totpcp from TLIsedaemunday where lidate=:lidate ORDER BY lidate "
+
+    cur.execute(sql, lidate=date )
+    res = cur.fetchall()
+
+    dbOut()
+    return res
+
 # 접속 종료
 def dbOut() :
     cur.close()
     con.close()
+

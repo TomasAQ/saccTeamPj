@@ -59,8 +59,13 @@ def makeCsv(dfRes) :
     # dfRes.to_csv("cheon_yeondong_nan.csv")
     dfRes.to_csv("cheon_yeondong.csv")
 
+def isnasu() :
+    df =pd.read_csv('cheon_yeondong.csv')
+    print(df.isna().sum())
+
 
 if __name__ == '__main__':
-    read_csv_df()
-    get_csv_data()
+    # read_csv_df()
+    # get_csv_data()
+    isnasu()
 

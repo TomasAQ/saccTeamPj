@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--bootstrap-->
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h3 class="text-muted">예보시간 {{forecastVal}}시간 기준 적중률 </h3>
+        </div>
+        <div class="jumbotron">
+            <p class="lead">
+                2020 {{startmon}}월 ~ 2020 {{endmon}}월 까지 분석
+            </p>
+            <form action="/analysis1resultdetail"  method="get" >
+                <input type="hidden" name="forecastVal" value="{{forecastVal}}">
+                <button class="btn btn-lg btn-primary col-lg-12" role="button">데이터 상세보기</button>
+            </form>
+
+
+
+
+        </div>
+
+
+        <br>
+
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <strong>최고 기온 </strong> <h3>{{hitempPred}} % </h3>
+            </div>
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=ihitempbar1) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=ihitempbar2) }}" >
+
+                </div>
+            </div>
+
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=ihitemplin) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=ihitempsca ) }}" >
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="alert alert-info" role="alert">
+                <strong>최저 기온  </strong> <h3>{{lotempPred}} % </h3>
+            </div>
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=ilotempbar1) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=ilotempbar2) }}" >
+
+                </div>
+            </div>
+
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=ilotemplin) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=ilotempsca ) }}" >
+
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <div class="alert alert-info" role="alert">
+                <strong>평균 기온  </strong> <h3>{{avtempPred}} % </h3>
+            </div>
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=iavtempbar1) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=iavtempbar2) }}" >
+
+                </div>
+            </div>
+
+            <div class="row placeholders">
+                <div class="col-xs-3 col-sm-6 placeholder" >
+                  <img class="img-responsive" src="{{ url_for('static' , filename=iavtemplin) }}" >
+
+                </div>
+                <div class="col-xs-3 col-sm-6 placeholder">
+                    <img class="img-responsive" src="{{ url_for('static' , filename=iavtempsca ) }}" >
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

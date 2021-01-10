@@ -3,13 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>SSAC Project_1st Team 5</title>
+    <!--bootstrap-->
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h3>SSAC Project_1st Team 5</h3>
-    <h1>예보평가 프로젝트</h1>
-    <button type="button" onclick="location.href='/apply'" >분석페이지로 이동</button><br><br>
-    <button type="button" onclick="location.href='/daylist'">천연동 일일 데이터</button><br><br>
-    <button type="button" onclick="location.href='/grap'">그래프 그리기</button>
 
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">SSAC Project_1st Team 5</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>예보평가 프로젝트</h1>
+        <p class="lead">기상청 가상자료개방포털에서 제공하는 초단기실황 데이터와 초단기예보 데이터를 활용한 데이터 분석</p>
+        <p>
+            <div class="col-lg-12" >
+                <a class="btn btn-lg btn-success col-lg-12" href="/analysis1" role="button">일별 데이터 분석</a>
+            </div>
+<!--            <div class="col-lg-6" >-->
+<!--              <a class="btn btn-lg btn-success col-lg-12" href="/analysis2" role="button">시간별 데이터 분석</a>-->
+<!--            </div>-->
+
+        </p>
+        <br>
+      </div>
+
+      <div class="row marketing">
+          <h1>팀원</h1>
+        <div class="col-lg-6">
+          <h3>한세섭</h3>
+          <p>가상데이터 분석 , 기상 예측 공식을 활용한 예보 적중률 계산 ,GUI </p>
+
+          <h3>서명인</h3>
+          <p>가상데이터 분석 , 데이터 전처리 , matplotlib과 seaborn을 활용한 그래프 작업</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h3>김용균</h3>
+          <p>데이터 전처리 , 데이터 DB저장 , GUI </p>
+
+          <h3>이재정</h3>
+          <p>가상데이터 수집 , 데이터 정형화  </p>
+
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Team 5</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- <div>
+
+        <a class="btn btn-lg btn-danger" href="/grap" role="button">그래프 그리기</a>
+    </div> -->
 </body>
 </html>

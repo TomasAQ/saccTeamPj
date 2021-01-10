@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--bootstrap-->
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="header">
+            <h3 class="text-muted">서대문구 천연동 일기실황과 일기예보 데이터을 비교</h3>
+        </div>
+        <div class="jumbotron">
+<!--            <p class="lead">날짜는 2020 1월 ~ 2020 12월 까지 분석이 가능하고 최고 기온,최저 기온,평균 기온 , 총강수량을 일별로 비교 </p>-->
+            <p class="lead">날짜는 2020 1월 ~ 2020 12월 까지 분석이 가능하고 최고 기온,최저 기온,평균 기온을 일별로 비교 </p>
+        </div>
+
+        <div class="container">
+            <h3>적중률 계산을 원하는 달을 골라주세요.</h3>
+            <h3 class="text-center">2020년</h3>
+            <form action="/analysis1result"  method="get" >
+                        <h4>시작 월</h4>
+                        <select class="form-control " name="startmon">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                        <h4>종료 월</h4>
+                        <select class="form-control" name="endmon">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    <h4>예보시간 설정</h4>
+                    <select class="form-control" name="forecast">
+                        <option value="1.0">1</option>
+                        <option value="2.0">2</option>
+                        <option value="3.0">3</option>
+                        <option value="4.0">4</option>
+                        <option value="5.0">5</option>
+                        <option value="6.0">6</option>
+                    </select>
+                <br>
+                    <dl>
+                        <dt>예보시간(forecast)</dt>
+                        <dd>
+                            예보 시간이란 현재시간에 예보 시간을 더한 시간에 기상예보를 알려주는 것 입니다.<br>
+                            예를 들어 , 현재시간이 1시라고 가정했을때 예보시간이 1이면 2시에 기상예보 정보를  <br>
+                            예보시간이 2이면 3시에 기상예보 정보를 알려주는 형식입니다.
+                        </dd>
+                    </dl>
+                    <div>
+                        <button class="btn btn-lg btn-primary col-lg-12" role="button">일일 데이터 적중률 계산</button>
+                    </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

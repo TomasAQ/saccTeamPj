@@ -2,18 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SSAC Project_1st Team 5</title>
+    <!--    bootstrap-->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/starter-template.css" rel="stylesheet">
 </head>
 <body>
 
 <!--{{result_list}}-->
 
-<div>
-<!--    <img src="{{ url_for('static' , filename='image/graph.jpg') }}" />-->
-    <img src="{{ url_for('static' , filename=image_file) }}" />
+<!--<div>-->
+<!--    <img src="{{ url_for('static' , filename=image_file) }}" />-->
+<!--</div>-->
 
+<div class="col-sm-11 col-sm-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 main">
+    <h1>그래프</h1>
+        <h1>3개</h1>
+        <div class="row placeholders">
+            <div class="col-xs-4 col-sm-4 placeholder" style="background-color: aqua;">
+              <img class="img-responsive" src ="http://placehold.it/400x400/efa/aae&text=test">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-4 col-sm-4 placeholder">
+              <img width="400" height="400" src="{{ url_for('static' , filename=image_file) }}" />
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-4 col-sm-4 placeholder">
+                <img class="img-responsive" src ="http://placehold.it/400x400/efa/aae&text=test">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+        </div>
+        <h1>2개</h1>
+        <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder" style="background-color: aqua;">
+              <img class="img-responsive" src ="http://placehold.it/400x400/efa/aae&text=test">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+                <img width="640" height="480" src="{{ url_for('static' , filename=image_file) }}" />
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+        </div>
+        <h1>1개</h1>
+        <div class="row placeholders">
+            <div class="col-xs-12 col-sm-12 placeholder">
+                <img width="640" height="480" src="{{ url_for('static' , filename=image_file) }}" />
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+        </div>
 </div>
 
 
+<!--    bootstrap-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </body>
 </html>
